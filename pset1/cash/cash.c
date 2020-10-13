@@ -1,13 +1,14 @@
 #include <cs50.h>
 #include <stdio.h>
+#include <math.h>
 
 // Strict compiler function declaration
-float get_positive_float(void);
+float get_positive_rounded(void);
 
 int main(void)
 {
-    // Get the amount owed in positive numbers only
-    float owed = get_positive_float();
+    // Get the amount owed in positive rounded integers
+    int owed = get_positive_rounded();
     
     // Keep track of the number of used coins
     int counter = 0;
@@ -15,32 +16,33 @@ int main(void)
     // Find the type of used coins
     while (owed > 0)
     {
+        
         // Subtract the value of the largest coin type until 'owed' is zero
-        if (owed >= 0.25)
+        if (owed >= 25)
         {
-            owed -= 0.25;
+            owed -= 25;
         }
-        else if (owed >= 0.1)
+        else if (owed >= 10)
         {
-            owed -= 0.1;
+            owed -= 10;
         }
-        else if (owed >= 0.05)
+        else if (owed >= 5)
         {
-            owed -= 0.05;
+            owed -= 5;
         }
         else
         {
-            owed -= 0.01;
+            owed -= 1;
         }
         
         // One coin was used
         counter++;
     }
     
-    printf("%i\n", counter);
+    printf("Coins: %i\n", counter);
 }
 
-float get_positive_float(void)
+float get_positive_rounded(void)
 {
     float money;
     
@@ -51,5 +53,5 @@ float get_positive_float(void)
     }
     while (money < 0);
     
-    return money;
+    return round(money * 100);
 }
