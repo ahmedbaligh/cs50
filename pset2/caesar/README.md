@@ -47,11 +47,11 @@ Usage: ./caesar key
 ```
 
 ```
-$ ./caesar 1 2 3
+$ ./caesar
 missing command-line argument
 ```
 
 ```
-$ ./caesar
+$ ./caesar 1 2 3
 too many command-line arguments
 ```
