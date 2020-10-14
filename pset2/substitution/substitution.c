@@ -36,7 +36,7 @@ int main(int argc, string argv[])
     {
         letter = text[i];
 
-        // Only encrypt text, if it's alphabetical
+        // Only encrypt text, if it's alphabetic
         if (isalpha(letter))
         {
             // Get each letter's cipher from its equivalent index
@@ -52,7 +52,7 @@ int main(int argc, string argv[])
                 cipher = toupper(key[index]);
             }
         }
-        // Don't encrypt non-alphabetical letters
+        // Don't encrypt non-alphabetic letters
         else
         {
             cipher = letter;
@@ -86,7 +86,7 @@ string check_arguments_validity(int count, string arguments[])
     // Advise and exit, if the cipher has less than 26 letters
     if (lettersCount != 26)
     {
-        printf("enter exactly 26 alphabetical letters\n");
+        printf("enter exactly 26 alphabetic letters\n");
         return "-1";
     }
 
@@ -101,10 +101,10 @@ string check_arguments_validity(int count, string arguments[])
     int index;
     for (int i = 0; i < lettersCount; i++)
     {
-        // Advise and exit, if any letter in the cipher is not alphabetical
+        // Advise and exit, if any letter in the cipher is not alphabetic
         if (!isalpha(cipher[i]))
         {
-            printf("all letters must be alphabetical\n");
+            printf("all letters must be alphabetic\n");
             return "-1";
         }
 
@@ -117,7 +117,7 @@ string check_arguments_validity(int count, string arguments[])
         {
             alphabets[index] = cipher[i];
         }
-        // Advise and exit, if a letter in the cipher repeats
+        // Advise and exit, if a letter in the cipher is repeated
         else
         {
             printf("use each letter only once\n");
