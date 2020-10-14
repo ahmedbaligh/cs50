@@ -26,9 +26,9 @@ Install the Clang compiler on Linux:
 sudo apt install clang
 ```
 
-### Enable CS50-specific Commands
+## Enable CS50-specific Commands
 
-#### `make` Command
+### `make` Command
 
 The `make` command simplifies the process of compiling your `C` source code. 
 
@@ -45,14 +45,14 @@ To reload the file, use:
 source ~/.bashrc
 ```
 
-##### Usage
+#### Usage
 Now you can compile your `C` source code using:
 
 ```bash
 make your_file_name
 ```
 
-#### `help50` Command
+### `help50` Command
 
 The `help50` command can be used to help you identify errors that arise, when compiling our code.
 
@@ -62,13 +62,13 @@ Make sure you have Python 3.6 or higher installed, then run the following:
 pip install help50
 ```
 
-##### Usage
+#### Usage
 
 ```bash
 help50 make your_file_name
 ```
 
-#### `check50` Command
+### `check50` Command
 
 The `check50` command is used to give you automatic feedback on the correctness of your code, as it compares your code to pre-written tests in a git repo, if the checks exist for this certain CS50 problem set.
 
@@ -78,7 +78,7 @@ Make sure you have Python 3.6 or higher installed, then run the following:
 pip install check50
 ```
 
-##### Usage
+#### Usage
 
 You need to know the the slug of the certain problem set you want to check. For instance, this here:
 
