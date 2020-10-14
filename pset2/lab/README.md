@@ -78,7 +78,7 @@ Points are scored for each alphabetic character as per the table below:
 
 * If both entries have the same score, the program outputs `Tie!`.
 
----
+
 ## Usage
 
 To run the compiled file, run `./scrabble` in the `lab` directory and the program's behaviour should be as per the examples below.
