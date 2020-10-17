@@ -84,13 +84,16 @@ void print_winner(void)
 {
     // Bubble Sort the candidates array descendingly
     candidate temp;
-    for (int i = 0; i < candidate_count; i++)
+    for (int i = 0; i < candidate_count - 1; i++)
     {
-        if (candidates[i].votes < candidates[i + 1].votes)
+        for (int j = 0; j < candidate_count - 1; j++)
         {
-            temp = candidates[i];
-            candidates[i] = candidates[i + 1];
-            candidates[i + 1] = temp;
+            if (candidates[j].votes < candidates[j + 1].votes)
+            {
+                temp = candidates[j];
+                candidates[j] = candidates[j + 1];
+                candidates[j + 1] = temp;
+            }
         }
     }
 
