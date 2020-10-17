@@ -66,7 +66,7 @@ int main(int argc, string argv[])
 // Update vote totals given a new vote
 bool vote(string name)
 {
-    // TODO
+    // If the candidate exists, increament their number of votes
     for (int i = 0; i < candidate_count; i++)
     {
         if (strcmp(name, candidates[i].name) == 0)
@@ -82,7 +82,16 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    // TODO
-    return;
+    // Sort the candidates array descendingly
+    candidate temp;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes < candidates[i + 1].votes)
+        {
+            temp = candidates[i];
+            candidates[i] = candidates[i + 1];
+            candidates[i + 1] = temp;
+        }
+    }
 }
 
