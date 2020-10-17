@@ -82,7 +82,7 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    // Sort the candidates array descendingly
+    // Bubble Sort the candidates array descendingly
     candidate temp;
     for (int i = 0; i < candidate_count; i++)
     {
@@ -91,6 +91,17 @@ void print_winner(void)
             temp = candidates[i];
             candidates[i] = candidates[i + 1];
             candidates[i + 1] = temp;
+        }
+    }
+
+    // Compare each candidate votes to the highest number of votes
+    // Whomever candidate has the highest votes, print them as winners
+    int highest = candidates[0].votes;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes == highest)
+        {
+            printf("%s\n", candidates[i].name);
         }
     }
 }
