@@ -164,7 +164,18 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
+    // Iterate over all candidates
+    for (int candidate = 0; candidate < candidate_count; candidate++)
+    {
+        // If a candidate has more than half of 
+        // the votes, print their name as the winner
+        if (candidates[candidate].votes > 0.5 * voter_count)
+        {
+            printf("%s\n", candidates[candidate].name);
+            return true;
+        }
+    }
+
     return false;
 }
 
