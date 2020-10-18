@@ -151,14 +151,17 @@ void tabulate(void)
         // Iterate over all candidates
         for (int candidate = 0; candidate < candidate_count; candidate++)
         {
-            // Increament candidate's number of votes if voter voted
-            // for this candidate and the candidate is not eliminated
+            // Check if this candidate is this user's first preference
             if (preferences[voter][0] == candidate)
             {
                 if (candidates[candidate].eliminated)
                 {
+                    // If first preference candidate is eliminated
+                    // Look for the next uneliminated preference
                     for (int i = 1; i < candidate_count; i++)
                     {
+                        // Increament the number of votes for the first uneliminated candidate 
+                        // of the voter's next preferences and then continue to the next vote
                         if (!candidates[preferences[voter][i]].eliminated)
                         {
                             candidates[preferences[voter][i]].votes += 1;
@@ -166,9 +169,12 @@ void tabulate(void)
                         }
                     }
                 }
+                // Increament candidate's number of votes, if candidate
+                // is not eliminated and then continue to the next vote
                 else
                 {
                     candidates[candidate].votes += 1;
+                    break;
                 }
             }
         }
