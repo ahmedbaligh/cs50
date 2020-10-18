@@ -182,8 +182,25 @@ bool print_winner(void)
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // TODO
-    return 0;
+    // Initialize the minimum as the votes for the first candidate
+    int min = candidates[0].votes;
+
+    // Iterate over all the remaining candidates to check for lower votes
+    for (int i = 1; i < candidate_count; i++)
+    {
+        // Only check candidates who have not been eliminated
+        if (!candidates[i].eliminated)
+        {
+            // If a candidate's votes are lower than the
+            // current minimum then make it the new minimum
+            if (candidates[i].votes < min)
+            {
+                min = candidates[i].votes;
+            }
+        }
+    }
+
+    return min;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
