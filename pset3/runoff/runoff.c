@@ -153,9 +153,23 @@ void tabulate(void)
         {
             // Increament candidate's number of votes if voter voted
             // for this candidate and the candidate is not eliminated
-            if (preferences[voter][0] == candidate && !candidates[candidate].eliminated)
+            if (preferences[voter][0] == candidate)
             {
-                candidates[candidate].votes += 1;
+                if (candidates[candidate].eliminated)
+                {
+                    for (int i = 1; i < candidate_count; i++)
+                    {
+                        if (!candidates[preferences[voter][i]].eliminated)
+                        {
+                            candidates[preferences[voter][i]].votes += 1;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    candidates[candidate].votes += 1;
+                }
             }
         }
     }
@@ -221,15 +235,18 @@ bool is_tie(int min)
 
             // If there is a tie, increament the number of ties
             if (candidates[i].votes == min)
+            {
                 tie_count++;
-            
+            }
         }
     }
     
     // Return true, only if all uneliminated candidates have ties
     if (tie_count == not_eliminated_count)
+    {
         return true;
-    
+    }
+
     return false;
 }
 
