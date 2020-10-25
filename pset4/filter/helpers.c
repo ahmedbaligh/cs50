@@ -23,7 +23,29 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
 // Convert image to sepia
 void sepia(int height, int width, RGBTRIPLE image[height][width])
 {
-    return;
+    int red, green, blue;
+    int sepiaRed, sepiaGreen, sepiaBlue;
+    for (int row = 0; row < height; row++)
+    {
+        for (int col = 0; col < width; col++)
+        {
+            // Get the original color values in each pixel
+            red = image[row][col].rgbtRed;
+            green = image[row][col].rgbtGreen;
+            blue = image[row][col].rgbtBlue;
+
+            // Calculate the Sepia filter value for each color in each pixel
+            sepiaRed = round((0.393 * red) + (0.769 * green) + (0.189 * blue));
+            sepiaGreen = round((0.349 * red) + (0.686 * green) + (0.168 * blue));
+            sepiaBlue = round((0.272 * red) + (0.534 * green) + (0.131 * blue));
+
+            // Apply the Sepia filter to each pixel
+            // If the filter's color value exceeds 255, cap it to 255
+            image[row][col].rgbtRed = (sepiaRed < 255) ? sepiaRed : 255;
+            image[row][col].rgbtGreen = (sepiaGreen < 255) ? sepiaGreen : 255;
+            image[row][col].rgbtBlue = (sepiaBlue < 255) ? sepiaBlue : 255;
+        }
+    }
 }
 
 // Reflect image horizontally
