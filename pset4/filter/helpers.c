@@ -56,9 +56,10 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int col = 0; col < width / 2; col++)
         {
+            // Substitute corresponding pixels arround the vertical axis
             tmp = image[row][col];
-            image[row][col] = image[row][width - col];
-            image[row][width - col] = tmp;
+            image[row][col] = image[row][width - col - 1];
+            image[row][width - col - 1] = tmp;
         }
     }
 }
