@@ -86,16 +86,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             // Store target pixel and its surronding blur box
             // pixels based on its position in the image array
             middle = image[row][col];
+            upperLeft = upper = upperRight = left = right = bottomLeft = bottom = bottomRight = ignore;
 
             // Corner case: top-left
             if (row == 0 && col == 0)
             {
-                upperLeft = ignore;
-                upper = ignore;
-                upperRight = ignore;
-                left = ignore;
                 right = image[row][col + 1];
-                bottomLeft = ignore;
                 bottom = image[row + 1][col];
                 bottomRight = image[row + 1][col + 1];
                 count = 4;
@@ -103,27 +99,17 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             // Corner case: bottom-left
             else if (row == height - 1 && col == 0)
             {
-                upperLeft = ignore;
                 upper = image[row - 1][col];
                 upperRight = image[row - 1][col + 1];
-                left = ignore;
                 right = image[row][col + 1];
-                bottomLeft = ignore;
-                bottom = ignore;
-                bottomRight = ignore;
                 count = 4;
             }
             // Corner case: top-right
             else if (row == 0 && col == width - 1)
             {
-                upperLeft = ignore;
-                upper = ignore;
-                upperRight = ignore;
                 left = image[row][col - 1];
-                right = ignore;
                 bottomLeft = image[row + 1][col - 1];
                 bottom = image[row + 1][col];
-                bottomRight = ignore;
                 count = 4;
             }
             // Corner case: bottom-right
@@ -131,20 +117,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             {
                 upperLeft = image[row - 1][col - 1];
                 upper = image[row - 1][col];
-                upperRight = ignore;
                 left = image[row][col - 1];
-                right = ignore;
-                bottomLeft = ignore;
-                bottom = ignore;
-                bottomRight = ignore;
                 count = 4;
             }
             // Edge case: top
             else if (row == 0)
             {
-                upperLeft = ignore;
-                upper = ignore;
-                upperRight = ignore;
                 left = image[row][col - 1];
                 right = image[row][col + 1];
                 bottomLeft = image[row + 1][col - 1];
@@ -155,12 +133,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             // Edge case: left
             else if (col == 0)
             {
-                upperLeft = ignore;
                 upper = image[row - 1][col];
                 upperRight = image[row - 1][col + 1];
-                left = ignore;
                 right = image[row][col + 1];
-                bottomLeft = ignore;
                 bottom = image[row + 1][col];
                 bottomRight = image[row + 1][col + 1];
                 count = 6;
@@ -173,9 +148,6 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 upperRight = image[row - 1][col + 1];
                 left = image[row][col - 1];
                 right = image[row][col + 1];
-                bottomLeft = ignore;
-                bottom = ignore;
-                bottomRight = ignore;
                 count = 6;
             }
             // Edge case: right
@@ -183,12 +155,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             {
                 upperLeft = image[row - 1][col - 1];
                 upper = image[row - 1][col];
-                upperRight = ignore;
                 left = image[row][col - 1];
-                right = ignore;
                 bottomLeft = image[row + 1][col - 1];
                 bottom = image[row + 1][col];
-                bottomRight = ignore;
                 count = 6;
             }
             // Regular (middle) case
@@ -206,11 +175,14 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             }
 
             // Calculate the average color value for each pixel based on 'blur box'
-            blurred[row][col].rgbtRed = round((upperLeft.rgbtRed + upper.rgbtRed + upperRight.rgbtRed + left.rgbtRed + middle.rgbtRed + right.rgbtRed + bottomLeft.rgbtRed + bottom.rgbtRed + bottomRight.rgbtRed) / count);
+            blurred[row][col].rgbtRed = round((upperLeft.rgbtRed + upper.rgbtRed + upperRight.rgbtRed + left.rgbtRed + middle.rgbtRed + 
+                                               right.rgbtRed + bottomLeft.rgbtRed + bottom.rgbtRed + bottomRight.rgbtRed) / count);
 
-            blurred[row][col].rgbtGreen = round((upperLeft.rgbtGreen + upper.rgbtGreen + upperRight.rgbtGreen + left.rgbtGreen + middle.rgbtGreen + right.rgbtGreen + bottomLeft.rgbtGreen + bottom.rgbtGreen + bottomRight.rgbtGreen) / count);
+            blurred[row][col].rgbtGreen = round((upperLeft.rgbtGreen + upper.rgbtGreen + upperRight.rgbtGreen + left.rgbtGreen +
+                                                 middle.rgbtGreen + right.rgbtGreen + bottomLeft.rgbtGreen + bottom.rgbtGreen + bottomRight.rgbtGreen) / count);
 
-            blurred[row][col].rgbtBlue = round((upperLeft.rgbtBlue + upper.rgbtBlue + upperRight.rgbtBlue + left.rgbtBlue + middle.rgbtBlue + right.rgbtBlue + bottomLeft.rgbtBlue + bottom.rgbtBlue + bottomRight.rgbtBlue) / count);
+            blurred[row][col].rgbtBlue = round((upperLeft.rgbtBlue + upper.rgbtBlue + upperRight.rgbtBlue + left.rgbtBlue +
+                                                middle.rgbtBlue + right.rgbtBlue + bottomLeft.rgbtBlue + bottom.rgbtBlue + bottomRight.rgbtBlue) / count);
         }
     }
 
