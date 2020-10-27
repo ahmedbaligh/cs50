@@ -31,7 +31,7 @@ This program allows users to apply several image filters to BMP images like Gray
 
 ## Usage
 
-To run the compiled file, run `./filter` in the `filter` directory and the program's behaviour should be as per the examples below.
+To run the compiled file, run `./filter` in the `filter/less` directory and the program's behaviour should be as per the examples below.
 
 
 ```bash
