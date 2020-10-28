@@ -299,12 +299,14 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 }
 
 // Calculate edges based on Sobel operator
-int *calculateSobel(RGBTRIPLE grid[]) {
+int *calculateSobel(RGBTRIPLE grid[])
+{
     int sumXRed, sumYRed, sumXGreen, sumYGreen, sumXBlue, sumYBlue;
     sumXRed = sumYRed = sumXGreen = sumYGreen = sumXBlue = sumYBlue = 0; 
 
     // Calculate Gx and Gy for each color
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 9; i++)
+    {
         sumXRed += (grid[i].rgbtRed * Gx[i]);
         sumYRed += (grid[i].rgbtRed * Gy[i]);
         sumXGreen += (grid[i].rgbtGreen * Gx[i]);
