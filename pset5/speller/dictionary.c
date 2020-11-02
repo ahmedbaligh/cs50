@@ -33,8 +33,16 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // TODO
-    return 0;
+    // djb2 hash function from http://www.cse.yorku.ca/~oz/hash.html
+    unsigned long hash = 5381;
+    int c;
+
+    while ((c = *word++))
+    {
+        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+    }
+    
+    return hash % N;
 }
 
 // Loads dictionary into memory, returning true if successful, else false
