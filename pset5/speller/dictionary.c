@@ -1,6 +1,9 @@
 // Implements a dictionary's functionality
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "dictionary.h"
 
@@ -35,8 +38,54 @@ unsigned int hash(const char *word)
 // Loads dictionary into memory, returning true if successful, else false
 bool load(const char *dictionary)
 {
-    // TODO
-    return false;
+    // Open the dictionary
+    FILE *dict = fopen(dictionary, "r");
+    if (dict == NULL)
+    {
+        return false;
+    }
+    
+    // Allocate memory for a buffer to hold each word in the dictionary
+    char *buffer = malloc(LENGTH + 1);
+    if (buffer == NULL)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < N; i++)
+    {
+        table[i] = NULL;
+    }
+
+    // Read every word in the dictionary, one at a time
+    while (fscanf(dict, "%s", buffer) != EOF)
+    {
+        // Allocate memory for each new linked list element
+        node *n = malloc(sizeof(node));
+        if (n == NULL)
+        {
+            return false;
+        }
+
+        // Copy each read word into a new node
+        strcpy(n->word, buffer);
+        // printf("%s\n", n->word);
+
+        // Hash each word to get it an index in the hash table
+        int index = hash(n->word);
+
+        // Insert each new node at the start of linked lists in the hash table
+        n->next = table[index];
+        table[index] = n;
+
+        free(n);
+    }
+
+    // Release memory resources and close open dictionary
+    free(buffer);
+    fclose(dict);
+
+    return true;
 }
 
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
