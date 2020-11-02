@@ -16,7 +16,9 @@ typedef struct node
 node;
 
 // Number of buckets in hash table
-const unsigned int N = 1;
+// Optimally chosen as a prime number that is 1.3 
+// times the words count in the large dictionary
+const unsigned int N = 186019;
 
 // Hash table
 node *table[N];
