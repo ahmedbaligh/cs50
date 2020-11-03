@@ -65,11 +65,6 @@ bool load(const char *dictionary)
         return false;
     }
 
-    for (int i = 0; i < N; i++)
-    {
-        table[i] = NULL;
-    }
-
     // Read every word in the dictionary, one at a time
     while (fscanf(dict, "%s", buffer) != EOF)
     {
@@ -83,9 +78,6 @@ bool load(const char *dictionary)
         // Copy each read word into a new node
         strcpy(n->word, buffer);
 
-        // Increament the dictionary's word count
-        words++;
-
         // Hash each word to get it an index in the hash table
         int index = hash(n->word);
 
@@ -93,7 +85,8 @@ bool load(const char *dictionary)
         n->next = table[index];
         table[index] = n;
 
-        free(n);
+        // Increament the dictionary's word count
+        words++;
     }
 
     // Release memory resources and close open dictionary
