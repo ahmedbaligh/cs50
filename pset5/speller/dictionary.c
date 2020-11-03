@@ -23,6 +23,9 @@ const unsigned int N = 186019;
 // Hash table
 node *table[N];
 
+// Initialize the count of the dictionary's words
+unsigned int words = 0;
+
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
@@ -79,7 +82,9 @@ bool load(const char *dictionary)
 
         // Copy each read word into a new node
         strcpy(n->word, buffer);
-        // printf("%s\n", n->word);
+
+        // Increament the dictionary's word count
+        words++;
 
         // Hash each word to get it an index in the hash table
         int index = hash(n->word);
@@ -101,8 +106,7 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    return words;
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
