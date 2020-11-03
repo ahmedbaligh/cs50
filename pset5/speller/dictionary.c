@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
+#include <ctype.h>
 
 #include "dictionary.h"
 
@@ -29,7 +31,30 @@ unsigned int words = 0;
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-    // TODO
+    // Creates a lowercase copy of word
+    int n = strlen(word);
+    char lowerWord[n + 1];
+    for (int i = 0; i <= n; i++)
+    {
+        lowerWord[i] = tolower(word[i]);
+    }
+
+    // Hash the word
+    int index = hash(lowerWord);
+
+    // Initialize a cursor to the head node of the hased word
+    node *nextNode = table[index];
+
+    // Search all nodes in the linked list 
+    while (nextNode != NULL)
+    {
+        // Check if the word is in the dictionary, regardless of case
+        if (strcasecmp(nextNode->word, lowerWord) == 0)
+        {
+            return true;
+        }
+        nextNode = nextNode->next;
+    }
     return false;
 }
 
