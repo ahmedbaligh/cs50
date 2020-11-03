@@ -112,6 +112,19 @@ unsigned int size(void)
 // Unloads dictionary from memory, returning true if successful, else false
 bool unload(void)
 {
-    // TODO
-    return false;
+    // Iterate over each head node in the array
+    for (int i = 0; i < N; i++)
+    {
+        node *head = table[i];
+        node *cursor = head;
+        node *tmp = head;
+        // Free each node in each linked list in the hash table
+        while (cursor != NULL)
+        {
+            cursor = cursor->next;
+            free(tmp);
+            tmp = cursor;
+        }
+    }
+    return true;
 }
