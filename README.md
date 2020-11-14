@@ -6,18 +6,16 @@ This repository contains my own solutions to weekly problem sets in CS50, Harvar
 
 ### Library Installation
 
-#### Ubuntu
 ```bash
 $ curl -s https://packagecloud.io/install/repositories/cs50/repo/script.deb.sh | sudo bash
 $ sudo apt-get install libcs50
 ```
 
-#### Fedora
-```bash
-$ curl -s https://packagecloud.io/install/repositories/cs50/repo/script.rpm.sh | sudo bash
-$ yum install libcs50
-```
 or refer to [CS50 Library for C](https://github.com/cs50/libcs50/tree/master) for more information.
+
+#### Library Usage
+
+Now, to use the CS50 Library in your `C` programs, just write `#include <cs50.h>` atop your your code.
 
 ### Clang Installation
 Install the Clang compiler on Linux:
@@ -86,3 +84,23 @@ You need to know the the slug of the certain problem set you want to check. For 
 check50 cs50/problems/2020/x/credit
 ```
 checks the correctness of CS50x Credit problem set from Week 1.
+
+
+## CS50 Library for Python
+
+Firstly make sure that you have the latest version of `python3` installed. If you do not, simply execute:
+
+```bash
+$ sudo apt-get update
+$ sudo apt-get install python3.8 python3-pip
+```
+
+### Library Installation
+
+```bash
+pip install cs50
+```
+
+#### Library Usage
+
+Now, to use the CS50 Library in your `python` programs, you can just import the entire library by putting `import cs50` at the top in your Python program, or you could import specific functions (e.g. `get_string()`) using `from cs50 import get_string`.
