@@ -104,3 +104,10 @@ pip install cs50
 #### Library Usage
 
 Now, to use the CS50 Library in your `python` programs, you can just import the entire library by putting `import cs50` at the top in your Python program, or you could import specific functions (e.g. `get_string()`) using `from cs50 import get_string`.
+
+### SQLite Installation
+Install the SQLite Database Mangement System on Linux:
+
+```bash
+sudo apt install sqlite3
+```
