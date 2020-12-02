@@ -8,7 +8,40 @@
 
         <script>
 
-            // TODO: Add code to check answers to questions
+            // Add code to check answers to questions
+            function multipleChoiceCheck(event) {
+                const answer = event.srcElement;
+                let correctness = 'Incorrect';
+
+                if (document.querySelector('#multiple-choice-correctness'))
+                    document.querySelector('#multiple-choice-correctness').remove();
+                
+                if (answer.textContent === '1 person per 6 sheep') {
+                    answer.style.backgroundColor = 'green';
+                    correctness = 'Correct';
+                } else
+                    answer.style.backgroundColor = 'red';
+                
+                document.querySelector('.multiple-choice').insertAdjacentHTML('afterend', `<p id="multiple-choice-correctness">${correctness}</p>`);
+            }
+            
+            function freeResponseCheck(event) {
+                let correctness = 'Incorrect';
+                const countryInput = document.querySelector('#country');
+
+                if (document.querySelector('#free-response-correctness'))
+                    document.querySelector('#free-response-correctness').remove();
+
+                if (countryInput.value.toLowerCase() === 'switzerland') {
+                    countryInput.style.backgroundColor = 'green';
+                    correctness = 'Correct';
+                } else
+                    countryInput.style.backgroundColor = 'red';
+
+                document.querySelector('.free-response').insertAdjacentHTML('afterend', `<p id="free-response-correctness">${correctness}</p>`);
+            }
+
+            
 
         </script>
 
@@ -25,7 +58,13 @@
                 <h2>Part 1: Multiple Choice </h2>
                 <hr>
 
-                <!-- TODO: Add multiple choice question here -->
+                <!-- Add multiple choice question here -->
+                <h3 class="multiple-choice">What is the approximate ratio of people to sheep in Zealand?</h3>
+                <button onclick="multipleChoiceCheck(event);">6 people per 1 sheep</button>
+                <button onclick="multipleChoiceCheck(event);">3 people per 1 sheep</button>
+                <button onclick="multipleChoiceCheck(event);">1 person per 1 sheep</button>
+                <button onclick="multipleChoiceCheck(event);">1 person per 3 sheep</button>
+                <button onclick="multipleChoiceCheck(event);">1 person per 6 sheep</button>
 
             </div>
 
@@ -33,7 +72,10 @@
                 <h2>Part 2: Free Response</h2>
                 <hr>
 
-                <!-- TODO: Add free response question here -->
+                <!-- Add free response question here -->
+                <h3 class="free-response">In which country is it illegal to own only one guinea pig, as a lone guinea pig might get lonely?</h3>
+                <input id="country" type="text">
+                <button type="submit" onclick="freeResponseCheck(event);">Check Answer</button>
 
             </div>
 
