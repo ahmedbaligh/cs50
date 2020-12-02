@@ -2,6 +2,7 @@
 
 <html lang="en">
     <head>
+        <link rel="shortcut icon" href="https://st2.depositphotos.com/1915171/6207/v/600/depositphotos_62072697-stock-illustration-quiz-icon.jpg">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         <link href="styles.css" rel="stylesheet">
         <title>Trivia!</title>
@@ -9,36 +10,57 @@
         <script>
 
             // Add code to check answers to questions
-            function multipleChoiceCheck(event) {
-                const answer = event.srcElement;
-                let correctness = 'Incorrect';
+            document.addEventListener('DOMContentLoaded', () => {
+                const choiceQuestions = document.querySelectorAll('.multiple-choice');
+                const textQuestions = document.querySelectorAll('.free-response');
 
-                if (document.querySelector('#multiple-choice-correctness'))
-                    document.querySelector('#multiple-choice-correctness').remove();
-                
-                if (answer.textContent === '1 person per 6 sheep') {
-                    answer.style.backgroundColor = 'green';
-                    correctness = 'Correct';
-                } else
-                    answer.style.backgroundColor = 'red';
-                
-                document.querySelector('.multiple-choice').insertAdjacentHTML('afterend', `<p id="multiple-choice-correctness">${correctness}</p>`);
+                for (const question of choiceQuestions) {
+                    question.querySelector('h3').insertAdjacentHTML('afterend', '<p class="question-correctness"></p>');
+                    question.onclick = evt => {
+                        const child = evt.target;
+                        if (child.nodeName === 'BUTTON') {
+                            checkAnswer(child.textContent, question) ? correctAnswer(child) : incorrectAnswer(child);
+                        }
+                    };
+                }
+
+                for (const form of textQuestions) {
+                    form.querySelector('h3').insertAdjacentHTML('afterend', '<p class="question-correctness"></p>');
+                    form.onsubmit = evt => {
+                        evt.preventDefault();
+                        const answer = form.querySelector('input[type="text"]');
+                        checkAnswer(answer.value, form) ? correctAnswer(answer) : incorrectAnswer(answer);
+                    };
+                }
+
+            });
+
+            const choicesAnswers = {
+                1: '1 person per 6 sheep',
+                2: 'jeff bezos'
+            };
+
+            const textAnswers = {
+                1: 'switzerland',
+                2: 'greenland'
+            };
+
+            function checkAnswer(answer, question) {
+                const answers = question.className === 'multiple-choice' ? choicesAnswers : textAnswers;
+                const questionId = question.dataset.id;
+                if (answer.toLowerCase() === answers[questionId])
+                    return true;
+                return false;
             }
-            
-            function freeResponseCheck(event) {
-                let correctness = 'Incorrect';
-                const countryInput = document.querySelector('#country');
 
-                if (document.querySelector('#free-response-correctness'))
-                    document.querySelector('#free-response-correctness').remove();
+            function correctAnswer(answer) {
+                answer.style.backgroundColor = 'green';
+                answer.parentElement.querySelector('.question-correctness').textContent = 'Correct';
+            }
 
-                if (countryInput.value.toLowerCase() === 'switzerland') {
-                    countryInput.style.backgroundColor = 'green';
-                    correctness = 'Correct';
-                } else
-                    countryInput.style.backgroundColor = 'red';
-
-                document.querySelector('.free-response').insertAdjacentHTML('afterend', `<p id="free-response-correctness">${correctness}</p>`);
+            function incorrectAnswer(answer) {
+                answer.style.backgroundColor = 'red';
+                answer.parentElement.querySelector('.question-correctness').textContent = 'Incorrect';
             }
 
             
@@ -59,12 +81,23 @@
                 <hr>
 
                 <!-- Add multiple choice question here -->
-                <h3 class="multiple-choice">What is the approximate ratio of people to sheep in Zealand?</h3>
-                <button onclick="multipleChoiceCheck(event);">6 people per 1 sheep</button>
-                <button onclick="multipleChoiceCheck(event);">3 people per 1 sheep</button>
-                <button onclick="multipleChoiceCheck(event);">1 person per 1 sheep</button>
-                <button onclick="multipleChoiceCheck(event);">1 person per 3 sheep</button>
-                <button onclick="multipleChoiceCheck(event);">1 person per 6 sheep</button>
+                <section class="multiple-choice" data-id="1">
+                    <h3>What is the approximate ratio of people to sheep in Zealand?</h3>
+                    <button>6 people per 1 sheep</button>
+                    <button>3 people per 1 sheep</button>
+                    <button>1 person per 1 sheep</button>
+                    <button>1 person per 3 sheep</button>
+                    <button>1 person per 6 sheep</button>
+                </section>
+
+                <section class="multiple-choice" data-id="2">
+                    <h3>Who is the wealthiest man in the world?</h3>
+                    <button>Warren Buffett</button>
+                    <button>Mark Zuckerberg</button>
+                    <button>Jeff Bezos</button>
+                    <button>Bill Gates</button>
+                    <button>Elon Musk</button>
+                </section>
 
             </div>
 
@@ -73,9 +106,18 @@
                 <hr>
 
                 <!-- Add free response question here -->
-                <h3 class="free-response">In which country is it illegal to own only one guinea pig, as a lone guinea pig might get lonely?</h3>
-                <input id="country" type="text">
-                <button type="submit" onclick="freeResponseCheck(event);">Check Answer</button>
+                <form action="" class="free-response" data-id="1">
+                    <h3>In which country is it illegal to own only one guinea pig, as a lone guinea pig might get lonely?</h3>
+                    <input type="text">
+                    <button type="submit">Check Answer</button>
+                </form>
+
+                <form action="" class="free-response" data-id="2">
+                    <h3>What is the largest island in the world?</h3>
+                    <input type="text">
+                    <button type="submit">Check Answer</button>
+                </form>
+                
 
             </div>
 
