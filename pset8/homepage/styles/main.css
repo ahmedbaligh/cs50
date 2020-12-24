@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@1,500&family=Caveat:wght@400;700&family=Comfortaa:wght@700&family=Montserrat:ital,wght@0,600;1,600&family=Orbitron:wght@600&display=swap');
+
+
+/*                      Popular Reads                       */
+
+.popular-reads, .informatory {
+    margin: 4rem 0 6rem;
+}
+
+.popular-reads > h2 {
+    padding: 0 40px 20px 0;
+    border-bottom: 4px double grey;
+}
+
+h4 {
+    font: 1.2em 'Orbitron', sans-serif;
+}
+
+.card h3 {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+.popular-reads img {
+	margin-bottom: 5px;
+	width: 330px;
+	height: 240px;
+	border-radius: 8px;
+}
+
+.popular-reads .btn {
+    font-size: 0.9em;
+	color: #F7FFF7;
+	background: #33383b;
+  	padding: 6px;
+  	border-radius: 7px;
+	border-color: #fafbfc;
+	text-transform: uppercase;
+}
+
+.popular-reads .btn:hover, .popular-reads .btn:active {
+    background: linear-gradient(90deg, rgb(0, 37, 116) 0%, rgb(19, 46, 145) 100%);
+    padding: 6px 10px;
+}
+
+/*                      Dynamic Sections                            */
+
+.dynamic-sec {
+    margin-bottom: 3em;
+}
+
+.dynamic-sec p {
+    margin: 40px 0 0;
+    font-size: 0.7em;
+    text-align: center;
+}
+
+.dynamic-sec header {
+    padding: 0 1.2rem;
+    margin-bottom: 1.5rem;
+    /* border: 2px dotted grey; */
+    align-items: center;
+}
+
+.dynamic-sec h3 {
+    font: 2.2em/1.7 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0;
+}
+
+.dynamic-sec button {
+    font-size: 2.5rem;
+}
+
+dt, dd {
+	font-size: 1em;
+    margin: 0 30px;
+    padding-bottom: 8px;
+}
+
+dt {
+    font: 600 Georgia, 'Times New Roman', Times, serif;
+    margin-top: 15px;
+}
+
+table {
+    text-align: center;
+}
+
+caption {
+    caption-side: top;
+    margin-bottom: 1.1em;
+    text-align: center;
+}
+
+.fig-container dt {
+    font-size: 1.3rem;
+}
+
+.fig-container:nth-of-type(even){
+    margin-left: auto;
+    text-align: right;
+}
+
+.fig-container img {
+    margin-right: 15px;
+    border-radius: 7%;
+    border: 2px solid rgb(19, 46, 145);
+    float: left;
+    width: 40%;
+    max-width: 180px;
+	/* min-width: 110px; */
+}
+
+.fig-container:nth-of-type(even) img {
+    float: right;
+    margin-left: 15px;
+    margin-right: 0;
+    
+}
