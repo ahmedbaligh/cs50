@@ -1,0 +1,123 @@
+/*                      Import General Website Styles                       */
+
+@import url(./styles.css);
+
+/*                          Global                      */
+
+main {
+    margin: 120px 0;
+}
+
+/*                          Article                       */
+
+.article {
+    border: solid 1px #dce3e5;
+}
+
+.post-header {
+    border-bottom: solid 2px #dce3e5;
+}
+
+header.post-header > * {
+    margin-top: 10px;
+}
+
+h1.post-title {
+    margin-top: 40px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.author, time {
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.share-menu {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.post-header img {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    padding: 8px;
+}
+
+.post-header img:hover, .post-header img:active {
+    border-radius: 100%;
+    background-color: rgb(0, 110, 255);
+    padding: 5px;
+}
+
+article.article > * {
+    margin-bottom: 40px;
+}
+
+.post-content h3 {
+    text-decoration: underline;
+    font-size: 1.5rem;
+}
+
+.author-info {
+    border-top: solid 2px #dce3e5;
+}
+
+footer.author-info > * {
+    margin-top: 30px;
+}
+
+.author-info img {
+    width: 65px;
+    height: 65px;
+}
+
+.bio p {
+    font-size: 1rem;
+}
+
+
+/*                          Side Bar                         */
+
+.side-bar {
+    border: solid 1px #dce3e5;
+}
+
+.side-bar:before {
+    display: block;
+    background: linear-gradient(90deg, rgb(0, 37, 116) 0%, rgb(19, 46, 145) 80%);
+    content: '';
+    height: 3px;
+    margin-bottom: 20px;
+}
+
+.side-bar h2 {
+    font: 1.4rem 'Comfortaa', cursive;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.side-bar-menu {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    /* padding-left: 20px; */
+}
+
+.side-bar img {
+    max-width: 100px;
+    border-radius: 5px;
+}
+
+.side-bar-menu p {
+    width: fit-content;
+    margin-left: 20px;
+    font: 300 1.05em/1.6 Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(15, 41, 97);
+}
+
+.side-bar-menu p:hover, .side-bar-menu a:active {
+    color:rgba(15, 41, 97, 0.8);
+    cursor: pointer;
+}
