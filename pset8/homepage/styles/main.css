@@ -23,20 +23,20 @@ h4 {
 }
 
 .popular-reads img {
-	margin-bottom: 5px;
-	width: 330px;
-	height: 240px;
-	border-radius: 8px;
+    margin-bottom: 5px;
+    min-width: 330px;
+    min-height: 240px;
+    border-radius: 8px;
 }
 
 .popular-reads .btn {
     font-size: 0.9em;
-	color: #F7FFF7;
-	background: #33383b;
-  	padding: 6px;
-  	border-radius: 7px;
-	border-color: #fafbfc;
-	text-transform: uppercase;
+    color: #F7FFF7;
+    background: #33383b;
+      padding: 6px;
+      border-radius: 7px;
+    border-color: #fafbfc;
+    text-transform: uppercase;
 }
 
 .popular-reads .btn:hover, .popular-reads .btn:active {
@@ -73,7 +73,7 @@ h4 {
 }
 
 dt, dd {
-	font-size: 1em;
+    font-size: 1em;
     margin: 0 30px;
     padding-bottom: 8px;
 }
@@ -109,7 +109,7 @@ caption {
     float: left;
     width: 40%;
     max-width: 180px;
-	/* min-width: 110px; */
+    /* min-width: 110px; */
 }
 
 .fig-container:nth-of-type(even) img {

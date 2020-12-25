@@ -31,17 +31,6 @@
     padding: 50px;
 }
 
-.questions {
-    order: 1;
-    margin-right: 25px;
-    padding: 5px 0;
-}
-
-form {
-    margin: 0 50px 0 0;
-    padding: 0 30px;
-}
-
 .questions label {
     display: block;
     margin-bottom: 20px;
