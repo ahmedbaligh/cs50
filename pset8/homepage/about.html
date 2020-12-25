@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                margin: 0;
+            }
+
+            html {
+                box-sizing: border-box;
+            }
+
+            *, *:before, *:after {
+                box-sizing: inherit;
+            }
+
+            .columnn {
+                float: left;
+                width: 33.3%;
+                margin-bottom: 16px;
+                padding: 0 8px;
+            }
+
+            .cardd {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                margin: 8px;
+            }
+
+            .about-section {
+                padding: 50px;
+                text-align: center;
+                background-color: #474e5d;
+                color: white;
+            }
+
+            .containerr {
+                padding: 0 16px;
+            }
+
+            .containerr::after, .roww::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+            .title {
+                color: grey;
+            }
+
+            .button {
+                border: none;
+                outline: 0;
+                display: inline-block;
+                padding: 8px;
+                color: white;
+                background-color: #000;
+                text-align: center;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            .button:hover {
+                background-color: #555;
+            }
+
+            @media screen and (max-width: 650px) {
+                .columnn {
+                    width: 100%;
+                    display: block;
+                }
+            }
+        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="Astrophysics Blog" content="Blog on interesting Astronomy and Physics stuff!">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <link href="./styles/main.css" rel="stylesheet">
+        <title>About Us</title>
+    </head>
+    <body>
+        <header class="page-header mb-5" role="banner">
+            <nav role="navigation" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+                <div class="container d-flex">
+                    <a href="./index.html" class="navbar-brand blog-name">Astrophysics Blog</a>
+                    <span class="text-uppercase navbar-text d-none d-xl-inline-block">Ad astra per aspera</span>
+                    <button
+                        class="navbar-toggler btn btn-outline-dark active"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapsable-navbar"
+                        aria-label="Toggle Navigation"
+                        aria-expanded="false"
+                        aria-controls="collapsable-navbar"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="collapsable-navbar">
+                        <ul class="site-nav-menu navbar-nav">
+                            <li class="nav-item"><a class="nav-link active" href="./index.html">Home</a></li>
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    id="blogs-dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    href="./post.html"
+                                >Articles</a>
+                                <div class="dropdown-menu" aria-labelledby="blogs-dropdown">
+                                    <a class="dropdown-item" href="./articles/neutron-star.html">Neutron Stars</a>
+                                    <a class="dropdown-item" href="./articles/string-theory.html">String Theory</a>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./about.html">About</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="about-section">
+            <h1 class="mt-3">About Us Page</h1>
+            <p>Some text about who we are and what we do.</p>
+            <p>Resize the browser window to see that this page is responsive by the way.</p>
+        </div>
+
+        <h2 class="my-5" style="text-align:center">Our Team</h2>
+        <div class="roww">
+            <div class="columnn">
+                <div class="cardd">
+                    <!-- <img src="/w3images/team1.jpg" alt="Jane" style="width:100%"> -->
+                    <div class="containerr">
+                        <h2>Ahmed Baligh</h2>
+                        <p class="title">CEO & Founder</p>
+                        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                        <p>jane@example.com</p>
+                        <p><button class="button">Contact</button></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columnn">
+                <div class="cardd">
+                    <!-- <img src="/w3images/team2.jpg" alt="Mike" style="width:100%"> -->
+                    <div class="containerr">
+                        <h2>Jane Doe</h2>
+                        <p class="title">Art Director</p>
+                        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                        <p>mike@example.com</p>
+                        <p><button class="button">Contact</button></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="columnn">
+                <div class="cardd">
+                    <!-- <img src="/w3images/team3.jpg" alt="John" style="width:100%"> -->
+                    <div class="containerr">
+                        <h2>John Doe</h2>
+                        <p class="title">Designer</p>
+                        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                        <p>john@example.com</p>
+                        <p><button class="button">Contact</button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer role="contentinfo" class="page-footer mt-5 bg-dark d-flex flex-column flex-md-row-reverse">
+            <section class="questions mr-md-2 mr-lg-5">
+                <form>
+                    <label class="text-center text-md-left">Contact Me</label>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Write your message or question here." required></textarea>
+                    <button
+                        type="submit"
+                        class="btn btn-block btn-outline-light"
+                        data-toggle="modal"
+                        data-target="#successful-submit"
+                    >
+                        Send
+                    </button>
+                    <div id="successful-submit" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content badge-light">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Successful Submission</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Your message have been sent successfully. We will get back to you, within 5-7 business days.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Back</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <section class="about mt-5 mt-md-0 text-center text-md-left">
+                <nav class="social-nav">
+                    <ul id="contact" class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="https://www.linkedin.com/in/ahmedbaligh" title="LinkedIn" target="_blank">
+                                <img src="./images/icons/linkedin.svg">
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://github.com/ahmedbaligh7" title="GitHub" target="_blank">
+                                <img src="./images/icons/github.svg">
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://twitter.com/ahmed_baligh7" title="Twitter" target="_blank">
+                                <img src="./images/icons/twitter.svg">
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.facebook.com/ahmedbaligh7" title="Facebook" target="_blank">
+                                <img src="./images/icons/facebook.svg">
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p>All Articles Rights Reserved ©Wikipedia®</p>
+                <p>Astrophysics Blog ©2020</p>
+            </section>
+        </footer>
+
+    </body>
+</html>
