@@ -46,7 +46,7 @@
                                 </div>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="./about.html">About</a></li>
                         </ul>
                     </div>
                 </div>
@@ -336,7 +336,32 @@
                     <label class="text-center text-md-left">Contact Me</label>
                     <input type="email" placeholder="Email" required>
                     <textarea placeholder="Write your message or question here." required></textarea>
-                    <button class="btn btn-block btn-outline-light" type="submit">Send</button>
+                    <button
+                        type="submit"
+                        class="btn btn-block btn-outline-light"
+                        data-toggle="modal"
+                        data-target="#successful-submit"
+                    >
+                        Send
+                    </button>
+                    <div id="successful-submit" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content badge-light">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Successful Submission</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Your message have been sent successfully. We will get back to you, within 5-7 business days.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Back</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </section>
             <section class="about mt-5 mt-md-0 text-center text-md-left">
