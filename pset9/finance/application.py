@@ -47,7 +47,41 @@ if not os.environ.get("API_KEY"):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
+
+    # Get all the stocks the user owns
+    stocks = db.execute('''SELECT *
+                           FROM transactions
+                           WHERE user_id = ?
+                           GROUP BY stock_symbol
+                           ORDER BY stock_symbol''', session['user_id']
+                       )
+
+    # Make a list with all needed info. about each stock
+    user_stocks = []
+    stocks_total = 0
+    for stock in stocks:
+
+        stock_data = lookup(stock['stock_symbol'])
+        stock_total = stock['shares_number'] * stock_data['price']
+
+        user_stocks.append({
+            'symbol': stock_data['symbol'],
+            'name': stock_data['name'],
+            'price': usd(stock_data['price']),
+            'shares': stock['shares_number'],
+            'total': usd(stock_total)
+        })
+
+        # Calculate the total current worth for all owned stocks
+        stocks_total += stock_total
+
+    # Query database for user's current cash amount
+    cash = db.execute('''SELECT cash
+                         FROM users
+                         WHERE id = ?;''', session['user_id']
+                     )[0]['cash']
+
+    return render_template('index.html', stocks=user_stocks, cash=usd(cash), total=usd(stocks_total + cash))
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -102,7 +136,6 @@ def buy():
                       SET cash = ?
                       WHERE id = ?;''', cash - total_price, user_id
                   )
-
         return redirect('/')
 
     # User reached route via GET (as by clicking a link or via redirect)
