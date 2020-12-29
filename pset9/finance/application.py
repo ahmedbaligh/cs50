@@ -6,6 +6,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+from datetime import datetime
 
 from helpers import apology, login_required, lookup, usd
 
@@ -53,7 +54,59 @@ def index():
 @login_required
 def buy():
     """Buy shares of stock"""
-    return apology("TODO")
+
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == 'POST':
+        # Ensure a stock's symbol was submitted
+        symbol = request.form.get('symbol')
+        if not symbol:
+            return apology('must provide stock\'s symbol', 403)
+
+        stock_data = lookup(symbol)
+        # Ensure the stock's symbol exists
+        if not stock_data:
+            return apology('stock\'s symbol does not exist', 403)
+
+        # Ensure the number of shares was submitted
+        shares = request.form.get('shares')
+        if not shares:
+            return apology('must provide number of shares', 403)
+
+        # Ensure the number of shares is a positive integer
+        try:
+            shares = int(shares)
+            if shares <= 0:
+                return apology('must provide a positive number of shares', 403)
+        except:
+            return apology('number of shares must be an integer', 403)
+
+        user_id = session['user_id']
+        cash = db.execute('''SELECT cash
+                             FROM users
+                             WHERE id = ?;''', user_id
+                         )[0]['cash']
+
+        # Ensure the user can afford the number of shares
+        share_price = stock_data['price']
+        total_price = shares * share_price
+        if cash < total_price:
+            return apology('you cannot afford this number of shares at the current price', 403)
+
+        # Add the buy transaction to database
+        db.execute('''INSERT INTO transactions(user_id, is_bought, stock_symbol, shares_number, share_price, timestamp)
+                      VALUES(?, ?, ?, ?, ?, ?);''', user_id, 1, stock_data['symbol'], shares, share_price, datetime.now()
+                  )
+
+        # Update the user's cash value
+        db.execute('''UPDATE users
+                      SET cash = ?
+                      WHERE id = ?;''', cash - total_price, user_id
+                  )
+
+        return redirect('/')
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    return render_template('buy.html')
 
 
 @app.route("/history")
@@ -153,7 +206,8 @@ def register():
         else:
             db.execute('''INSERT INTO users(username, hash)
                           VALUES(?, ?)''', request.form.get('username'), generate_password_hash(request.form.get('password')))
-            return render_template('login.html')
+
+            return redirect('/login')
 
     return render_template('register.html')
 
