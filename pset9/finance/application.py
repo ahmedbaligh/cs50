@@ -364,6 +364,15 @@ def change_password():
         if not request.form.get('current-password'):
             return apology('must provide current password', 403)
 
+        # Ensure current password is correct
+        elif not check_password_hash(db.execute('''SELECT hash
+                                                   FROM users
+                                                   WHERE id = ?;''', session['user_id']
+                                               )[0]['hash'],
+                                     request.form.get('current-password')
+                                    ):
+            return apology('password is incorrect', 403)
+
         # Ensure new password was submitted
         elif not request.form.get('new-password'):
             return apology('must provide new password', 403)
