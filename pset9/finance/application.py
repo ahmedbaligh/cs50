@@ -152,6 +152,7 @@ def buy():
                       WHERE id = ?;''', total_price, user_id
                   )
 
+        flash('Bought!')
         return redirect('/')
 
     # User reached route via GET (as by clicking a link or via redirect)
@@ -345,6 +346,7 @@ def sell():
                       WHERE id = ?;''', shares * share_price, user_id
                   )
 
+        flash('Sold!')
         return redirect('/')
 
     # User reached route via GET (as by clicking a link or via redirect)
