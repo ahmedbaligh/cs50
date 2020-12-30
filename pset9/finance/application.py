@@ -353,6 +353,38 @@ def sell():
     return render_template('sell.html', symbols=user_stocks.keys())
 
 
+@app.route("/password", methods=["GET", "POST"])
+@login_required
+def change_password():
+    """Change password"""
+
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == 'POST':
+        # Ensure current password was submitted
+        if not request.form.get('current-password'):
+            return apology('must provide current password', 403)
+
+        # Ensure new password was submitted
+        elif not request.form.get('new-password'):
+            return apology('must provide new password', 403)
+
+        # Ensure password  and confirmation password are the same
+        elif request.form.get('new-password') != request.form.get('confirmation'):
+            return apology('passwords don\'t match', 403)
+
+        # If all is good, change the user password's hash in database
+        else:
+            db.execute('''UPDATE users
+                          SET hash = ?
+                          WHERE id = ?;''', generate_password_hash(request.form.get('new-password')), session['user_id']
+                      )
+
+        return redirect('/login')
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    return render_template('password.html')
+
+
 def errorhandler(e):
     """Handle error"""
     if not isinstance(e, HTTPException):
