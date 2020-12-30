@@ -48,12 +48,11 @@ if not os.environ.get("API_KEY"):
 def index():
     """Show portfolio of stocks"""
 
+    user_id = session['user_id']
     # Get all the stocks the user owns
-    stocks = db.execute('''SELECT *
-                           FROM transactions
-                           WHERE user_id = ?
-                           GROUP BY stock_symbol
-                           ORDER BY stock_symbol''', session['user_id']
+    stocks = db.execute('''SELECT stock_symbol, shares_number
+                           FROM shares
+                           WHERE user_id = ? AND shares_number != 0;''', user_id
                        )
 
     # Make a list with all needed info. about each stock
@@ -78,7 +77,7 @@ def index():
     # Query database for user's current cash amount
     cash = db.execute('''SELECT cash
                          FROM users
-                         WHERE id = ?;''', session['user_id']
+                         WHERE id = ?;''', user_id
                      )[0]['cash']
 
     return render_template('index.html', stocks=user_stocks, cash=usd(cash), total=usd(stocks_total + cash))
@@ -128,14 +127,31 @@ def buy():
 
         # Add the buy transaction to database
         db.execute('''INSERT INTO transactions(user_id, is_bought, stock_symbol, shares_number, share_price, timestamp)
-                      VALUES(?, ?, ?, ?, ?, ?);''', user_id, 1, stock_data['symbol'], shares, share_price, datetime.now()
+                      VALUES(?, ?, ?, ?, ?, ?);''', user_id, 1, symbol, shares, share_price, datetime.now()
                   )
+
+        # Check if the user has shares of this stock
+        existing_shares = db.execute('''SELECT shares_number
+                                        FROM shares
+                                        WHERE user_id = ? AND stock_symbol = ?;''', user_id, symbol
+                                    )
+
+        if len(existing_shares) == 0:
+            db.execute('''INSERT INTO shares(user_id, stock_symbol, shares_number)
+                          VALUES(?, ?, ?);''', user_id, symbol, shares
+                      )
+        else:
+            db.execute('''UPDATE shares
+                          SET shares_number = shares_number + ?
+                          WHERE user_id = ? AND stock_symbol = ?;''', shares, user_id, symbol
+                      )
 
         # Update the user's cash value
         db.execute('''UPDATE users
-                      SET cash = ?
-                      WHERE id = ?;''', cash - total_price, user_id
+                      SET cash = cash - ?
+                      WHERE id = ?;''', total_price, user_id
                   )
+
         return redirect('/')
 
     # User reached route via GET (as by clicking a link or via redirect)
