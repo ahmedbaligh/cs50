@@ -249,7 +249,70 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+
+    # Query the database for the number of shares the user have each stock they own
+    user_id = session['user_id']
+    stocks = db.execute('''SELECT stock_symbol, shares_number
+                            FROM shares
+                            WHERE user_id = ? AND shares_number != 0;''', user_id
+                       )
+
+    # Make a dict with each of the user's stock symbols and their number of shares
+    user_stocks = {}
+    for stock in stocks:
+        user_stocks[stock['stock_symbol']] = stock['shares_number']
+
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == 'POST':
+        # Ensure a stock's symbol was submitted
+        symbol = request.form.get('symbol')
+        if not symbol:
+            return apology('must provide stock\'s symbol', 403)
+
+        # Ensure the stock's symbol exists in user's stocks
+        if symbol not in user_stocks:
+            return apology('stock\'s symbol does not exist in your stocks', 403)
+
+        # Ensure the number of shares was submitted
+        shares = request.form.get('shares')
+        if not shares:
+            return apology('must provide number of shares', 403)
+
+        # Ensure the number of shares is a positive integer
+        try:
+            shares = int(shares)
+            if shares <= 0:
+                return apology('must provide a positive number of shares', 403)
+        except:
+            return apology('number of shares must be an integer', 403)
+
+        # Ensure user has the requested number of shares
+        if user_stocks[symbol] < shares:
+            return apology('you do not own the requested number of shares', 403)
+
+        # Get the share price
+        share_price = lookup(symbol)['price']
+
+        # Add the sell transaction to database
+        db.execute('''INSERT INTO transactions(user_id, is_bought, stock_symbol, shares_number, share_price, timestamp)
+                      VALUES(?, ?, ?, ?, ?, ?);''', user_id, 0, symbol, shares, share_price, datetime.now()
+                  )
+
+        db.execute('''UPDATE shares
+                      SET shares_number = shares_number - ?
+                      WHERE user_id = ? AND stock_symbol = ?;''', shares, user_id, symbol
+                  )
+
+        # Update the user's cash value
+        db.execute('''UPDATE users
+                      SET cash = cash + ?
+                      WHERE id = ?;''', shares * share_price, user_id
+                  )
+
+        return redirect('/')
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    return render_template('sell.html', symbols=user_stocks.keys())
 
 
 def errorhandler(e):
