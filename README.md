@@ -1,5 +1,5 @@
 # CS50 Problem Sets
-This repository contains my own solutions to weekly problem sets in CS50, Harvard University's introduction to the intellectual enterprises of computer science and the art of programming. **(ongoing)**
+This repository contains my own solutions to weekly problem sets in CS50, Harvard University's introduction to the intellectual enterprises of computer science and the art of programming.
 
 
 ## CS50 Library for C
@@ -7,18 +7,18 @@ This repository contains my own solutions to weekly problem sets in CS50, Harvar
 ### Library Installation
 
 ```bash
-$ curl -s https://packagecloud.io/install/repositories/cs50/repo/script.deb.sh | sudo bash
-$ sudo apt-get install libcs50
+curl -s https://packagecloud.io/install/repositories/cs50/repo/script.deb.sh | sudo bash
+sudo apt-get install libcs50
 ```
 
 or refer to [CS50 Library for C](https://github.com/cs50/libcs50/tree/master) for more information.
 
 #### Library Usage
 
-Now, to use the CS50 Library in your `C` programs, just write `#include <cs50.h>` atop your your code.
+Now, to use the CS50 Library in your `C` programs, just write `#include <cs50.h>` atop your code.
 
 ### Clang Installation
-Install the Clang compiler on Linux:
+Install the `Clang` compiler on Linux:
 
 ```bash
 sudo apt install clang
@@ -33,9 +33,9 @@ The `make` command simplifies the process of compiling your `C` source code.
 Run the following scripts to add these necessary environment variables to the end of `.bashrc` file in Ubuntu. 
 
 ```bash
-$ echo 'export CC="clang"' >> ~/.bashrc
-$ echo 'export CFLAGS="-fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow"' >> ~/.bashrc
-$ echo 'export LDLIBS="-lcrypt -lcs50 -lm"' >> ~/.bashrc
+echo 'export CC="clang"' >> ~/.bashrc
+echo 'export CFLAGS="-fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow"' >> ~/.bashrc
+echo 'export LDLIBS="-lcrypt -lcs50 -lm"' >> ~/.bashrc
 ```
 To reload the file, use:
 
@@ -44,10 +44,11 @@ source ~/.bashrc
 ```
 
 #### Usage
+
 Now you can compile your `C` source code using:
 
 ```bash
-make your_file_name
+make <your_file_name>
 ```
 
 ### `help50` Command
@@ -57,13 +58,13 @@ The `help50` command can be used to help you identify errors that arise, when co
 Make sure you have Python 3.6 or higher installed, then run the following: 
 
 ```bash
-pip install help50
+pip3 install help50
 ```
 
 #### Usage
 
 ```bash
-help50 make your_file_name
+help50 make <your_file_name>
 ```
 
 ### `check50` Command
@@ -73,7 +74,7 @@ The `check50` command is used to give you automatic feedback on the correctness 
 Make sure you have Python 3.6 or higher installed, then run the following: 
 
 ```bash
-pip install check50
+pip3 install check50
 ```
 
 #### Usage
@@ -88,24 +89,25 @@ checks the correctness of CS50x Credit problem set from Week 1.
 
 ## CS50 Library for Python
 
-Firstly make sure that you have the latest version of `python3` installed. If you do not, simply execute:
+Firstly make sure that you have the latest version of `Python3` installed. If you do not, simply execute:
 
 ```bash
-$ sudo apt-get update
-$ sudo apt-get install python3.8 python3-pip
+sudo apt-get update
+sudo apt-get install python3.8 python3-pip
 ```
 
 ### Library Installation
 
 ```bash
-pip install cs50
+pip3 install cs50
 ```
 
 #### Library Usage
 
-Now, to use the CS50 Library in your `python` programs, you can just import the entire library by putting `import cs50` at the top in your Python program, or you could import specific functions (e.g. `get_string()`) using `from cs50 import get_string`.
+Now, to use the CS50 Library in your `Python` programs, you can just import the entire library by putting `import cs50` at the top in your Python program, or you could import specific functions (e.g. `get_string()`) using `from cs50 import get_string`.
 
 ### SQLite Installation
+
 Install the SQLite Database Mangement System on Linux:
 
 ```bash
